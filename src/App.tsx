@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import style from './App.module.scss';
-import { Table } from './component/table/Tabel';
+import { Table } from './component/table/Table';
 import { Storage } from "./component/localStorage/storage";
 import { SortComponent } from "./component/sortComponent/sortComponent";
 import { sorter, SORT_TYPE } from './utils/soter/sorter';
