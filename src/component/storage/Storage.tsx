@@ -4,8 +4,8 @@ import style from './storage.module.scss';
 export const Storage:FunctionComponent = () => {
 
     const clearLocalStorage =  () => {
-        return localStorage.clear()
-    }
+        return localStorage.clear();
+    };
 
     return (
         <div className={style.mainBlock}>

@@ -5,8 +5,8 @@ export enum SORT_TYPE  {
     HIGH = 'HIGH'
 }
 
-export const sorter = (arrayOfPlayers: Array<IPlayer>, type: string) => {
-    return arrayOfPlayers.sort((a, b) => {
+export const sorter = (arrayOfPlayers: ReadonlyArray<IPlayer>, type: SORT_TYPE) => {
+    return [...arrayOfPlayers].sort((a, b) => {
         if (type === SORT_TYPE.HIGH) {
             return b.score - a.score;
         }

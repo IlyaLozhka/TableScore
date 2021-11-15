@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import style from './table.module.scss';
 import { IPlayer } from '../../App';
-
+import { uid } from 'react-uid';
 
 interface IProps {
-    readonly tableData: Array<IPlayer>;
+    readonly tableData: ReadonlyArray<IPlayer>;
 }
 
 export const Table:FunctionComponent<IProps> = ({tableData}) => {
@@ -25,7 +25,7 @@ export const Table:FunctionComponent<IProps> = ({tableData}) => {
                 <tbody>
                 {
                     tableData.map(({player, score}) => {
-                        return <tr key={player}>
+                        return <tr key={uid(player)}>
                             <td>
                                 {player}
                             </td>

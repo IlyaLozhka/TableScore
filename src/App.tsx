@@ -1,36 +1,29 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import style from './App.module.scss';
 import { Table } from './component/table/Table';
-import { Storage } from "./component/localStorage/storage";
-import { SortComponent } from "./component/sortComponent/sortComponent";
+import { Storage } from "./component/storage/Storage";
+import { SortComponent } from "./component/sortComponent/SortComponent";
 import { sorter, SORT_TYPE } from './utils/soter/sorter';
 import { openStream } from "./utils/openStream/openStream";
+import { setLocalStorageData, setLocalStorageType } from "./utils/localStorageControl/localStorageControl";
 
 export interface IPlayer {
-    player: string;
-    score: number;
+    readonly  player: string;
+    readonly  score: number;
 }
 
 const App: FunctionComponent = () => {
 
-    const [playerData, setPlayerData] = useState<IPlayer[]>([]);
-    const [selectedSort, setSelectedSort] = useState<string>(SORT_TYPE.HIGH);
-    const [tableData, setTableData] = useState<IPlayer[]>([]);
+    const [playerData, setPlayerData] = useState<ReadonlyArray<IPlayer>>([]);
+    const [selectedSort, setSelectedSort] = useState<SORT_TYPE>(SORT_TYPE.HIGH);
+    const [tableData, setTableData] = useState<ReadonlyArray<IPlayer>>([]);
 
-    const changeSort = useCallback((sortType:string) => {
+    const changeSort = useCallback((sortType:SORT_TYPE) => {
         setSelectedSort(sortType);
-        sorter(tableData, sortType);
-    }, [tableData]);
+    }, []);
 
     useEffect(() => {
-
-        if (JSON.parse(localStorage.getItem('localData') as string)) {
-            setPlayerData([...JSON.parse(localStorage.getItem('localData') as string)]);
-            setSelectedSort(JSON.parse(localStorage.getItem('localSortType') as string));
-        }
-
-        openStream(setPlayerData);
-
+        openStream(setPlayerData, setSelectedSort);
     }, []);
 
     useEffect(() => {
@@ -38,12 +31,12 @@ const App: FunctionComponent = () => {
     }, [playerData, selectedSort]);
 
     useEffect(() => {
-        localStorage.setItem('localData', JSON.stringify(tableData))
+        setLocalStorageData(tableData);
     }, [tableData]);
 
     useEffect(() => {
-        localStorage.setItem('localSortType', JSON.stringify(selectedSort))
-    }, [selectedSort])
+        setLocalStorageType(selectedSort);
+    }, [selectedSort]);
 
     return (
         <div className={style.wrapper}>
