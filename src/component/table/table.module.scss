@@ -16,19 +16,19 @@
 
     & td {
       border-radius: 4px 4px 0 0;
-      background: #2e82c3;
+      background: #d7bc2b;
       padding: 5px;
     }
   }
 
   & tbody tr td {
-    border: 1px solid #2e82c3;
+    border: 1px solid #d7bc2b;
     border-radius: 4px;
-    background: #cbdfef;
+    background: #efd5cb;
     padding: 2px;
 
     &:hover {
-      background: #a2c3dd;
+      background: #ddc3a2;
       transition-duration: 0.2s;
     }
 
